@@ -85,7 +85,7 @@ df_dropFirst7Day['last Sat'] = tmp_list[6]
 
 # 用sklearn來看看結果
 df_dropFirst7Day = df_dropFirst7Day.drop(['備轉容量(MW)'],axis=1)
-df_dropFirst7Day = df_dropFirst7Day.iloc[:-2]
+df_dropFirst7Day = df_dropFirst7Day.iloc[:-1]
 
 X = df_dropFirst7Day.loc[:,df_dropFirst7Day.columns != '尖峰負載(MW)']
 y = df_dropFirst7Day['尖峰負載(MW)']
@@ -94,10 +94,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,shuffle=
 lm = LinearRegression()
 lm.fit(X_train,y_train)
 prediction = lm.predict(X_test)
-plt.scatter(y_test,prediction, s = 20)
-plt.xlabel('y test')
-plt.ylabel('predicted y')
-plt.show(block=False)
+#plt.scatter(y_test,prediction, s = 20)
+#plt.xlabel('y test')
+#plt.ylabel('predicted y')
+#plt.show(block=False)
 print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
 #print(X_test)
 
